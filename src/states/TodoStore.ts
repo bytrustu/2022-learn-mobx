@@ -14,10 +14,16 @@ class Todo {
 export class TodoStore {
     rootStore
 
-    @observable
     todos: Array<any> = []
 
     constructor(root: any) {
+
+        makeObservable(this, {
+            todos: observable,
+            createTodo: action,
+            deleteTodo: action,
+            updateTodo: action,
+        })
 
         this.rootStore = root
         this.todos = [
@@ -28,20 +34,18 @@ export class TodoStore {
         ]
     }
 
-    @action
     createTodo(text: string) {
         this.todos = [
             ...this.todos,
-            new Todo(this.todos[this.todos.length - 1] + 1, text)
+            new Todo(this.todos[this.todos.length - 1].id + 1, text)
         ]
+        console.log(this.todos)
     }
 
-    @action
     deleteTodo(id: number) {
         this.todos = this.todos.filter(el => el.id !== id)
     }
 
-    @action
     updateTodo(id: number, text: string) {
         const idx = this.todos.findIndex(el => el.id === id)
         const todo = this.todos

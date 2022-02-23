@@ -5,14 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {StoreProvider} from "./states/Context";
 import {RootStore} from "./states/RootStore";
+import {Provider} from "mobx-react";
 
 const rootStore = new RootStore()
 
 ReactDOM.render(
     <React.StrictMode>
-        <StoreProvider value={rootStore}>
+        <Provider {...rootStore}>
             <App/>
-        </StoreProvider>
+        </Provider>
 
     </React.StrictMode>,
     document.getElementById('root')

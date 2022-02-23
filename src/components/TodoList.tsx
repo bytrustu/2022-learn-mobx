@@ -1,14 +1,17 @@
 import React, { FC } from 'react';
+import {useStores} from "../states/Context";
 
 type ListProps = {
     list: Array<{id: number; text: string;}>
 }
 
 const TodoList: FC<ListProps> = ({ list }) => {
+    const { TodoStore } = useStores()
+
     return (
         <ul>
             {
-                list.map(item => (
+                TodoStore.todos.map(item => (
                     <li>
                         <strong>{item.id}</strong>
                         <p>{item.text}</p>

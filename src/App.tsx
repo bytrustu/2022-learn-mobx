@@ -9,7 +9,7 @@ import {TodoStore} from "./states/TodoStore";
 function App() {
     const { TodoStore } = useStores()
 
-    console.log(TodoStore)
+    console.log(TodoStore.todos)
   return (
     <Main>
       <TodoPage>

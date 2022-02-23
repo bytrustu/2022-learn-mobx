@@ -1,15 +1,29 @@
-import React from 'react';
+import React, {ChangeEvent, useCallback, useState} from 'react';
 import styled from "styled-components";
-import {Simulate} from "react-dom/test-utils";
+import {useStores} from "../states/Context";
 
 const InputBox = () => {
+
+    const { TodoStore } = useStores()
+    const [input, setInput] = useState<string>('')
+
+    const onChangeInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        setInput(e.target.value)
+    }, [])
+
+    const onClickButton = useCallback(() => {
+        TodoStore.createTodo(input)
+        console.log(input)
+    }, [input])
+
     return (
         <InputBoxStyle>
-            <input type="text" onChange={() => {
-            }}/>
-            <button onClick={() => {
-            }}>추가
-            </button>
+            <input
+                type="text"
+                onChange={onChangeInput}
+                value={input}
+            />
+            <button onClick={onClickButton}>추가</button>
         </InputBoxStyle>
     );
 };
