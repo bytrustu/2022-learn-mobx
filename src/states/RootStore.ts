@@ -2,9 +2,9 @@ import {TodoStore} from "./TodoStore";
 
 
 export class RootStore {
-    movieStore
+    TodoStore
 
     constructor() {
-        this.movieStore = new TodoStore(this)
+        this.TodoStore = new TodoStore(this)
     }
 }

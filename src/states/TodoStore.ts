@@ -27,4 +27,28 @@ export class TodoStore {
             new Todo(4, 'dddd'),
         ]
     }
+
+    @action
+    createTodo(text: string) {
+        this.todos = [
+            ...this.todos,
+            new Todo(this.todos[this.todos.length - 1] + 1, text)
+        ]
+    }
+
+    @action
+    deleteTodo(id: number) {
+        this.todos = this.todos.filter(el => el.id !== id)
+    }
+
+    @action
+    updateTodo(id: number, text: string) {
+        const idx = this.todos.findIndex(el => el.id === id)
+        const todo = this.todos
+        this.todos = [
+            ...this.todos.slice(0, idx),
+            new Todo(id, text),
+            ...this.todos.slice(idx + 1, this.todos.length)
+        ]
+    }
 }

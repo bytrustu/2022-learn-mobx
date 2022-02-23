@@ -2,13 +2,20 @@ import React from 'react';
 import './App.css';
 import styled from "styled-components";
 import InputBox from "./components/InputBox";
+import {useStores} from "./states/Context";
+import TodoList from "./components/TodoList";
+import {TodoStore} from "./states/TodoStore";
 
 function App() {
+    const { TodoStore } = useStores()
+
+    console.log(TodoStore)
   return (
     <Main>
       <TodoPage>
           <h1>TODO LIST</h1>
           <InputBox />
+          <TodoList list={TodoStore.todos} />
       </TodoPage>
     </Main>
   );
